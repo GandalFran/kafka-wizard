@@ -1,0 +1,21 @@
+{
+    "author": "GandalFran",
+    "email": "franpintosantos@usal.es",
+    "name": "D",
+    "kafka": {
+        "num_tries": 10,
+        "input_topics": [
+            "50978c2f-e2db-4023-9dd6-deac8d0f3343"
+        ],
+        "output_topics": [
+            "c4a3c5ee-37cf-46d6-9929-4114d15a3e26"
+        ],
+        "group_id": "0aea56ea-f8f1-45db-b734-9bde8dec15dc",
+        "broker": "localhost:9092",
+        "delivery_timeout": 3000
+    },
+    "flow": {
+        "producer": "yes",
+        "consumer": "yes"
+    }
+}

@@ -3,5 +3,4 @@
 
 __email__ = '{{ cookiecutter.email }}'
 __license__ = 'See LICENSE for details'
-__version__ = '{{ cookiecutter.version }}'
-__author__ = '{{ cookiecutter.author }}, {{ cookiecutter.github_username }} @ GitHub'
+__author__ = '{{ cookiecutter.author }}'

@@ -19,11 +19,11 @@ def requirements(filename):
 
 
 setup(
-    name='{{ cookiecutter.service_name }}',
+    name='{{ cookiecutter.name }}',
     version='1.0',
     packages=find_packages(),
-    url="https://www.github.com/default/{{ cookiecutter.service_name }}",
-    download_url='https://github.com/default/{{ cookiecutter.service_name }}/archive/1.0.tar.gz',
+    url="https://www.github.com/default/{{ cookiecutter.name }}",
+    download_url='https://github.com/default/{{ cookiecutter.name }}/archive/1.0.tar.gz',
     license='LICENSE.md',
     author='{{ cookiecutter.author }}',
     author_email='{{ cookiecutter.email }}',
@@ -34,7 +34,7 @@ setup(
     data_files=[],
     entry_points={
         'console_scripts': [
-            '{{ cookiecutter.service_name }}={{ cookiecutter.service_name }}.main:run'
+            '{{ cookiecutter.name }}={{ cookiecutter.name }}.main:run'
         ],
     },
     include_package_data=True,
@@ -46,12 +46,9 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Intended Audience :: Developers"
     ],
-    extras_require={
-        "tests": requirements(filename='tests/requirements.txt'),
-    },
     python_requires='>=3',
     project_urls={
-        'Bug Reports': 'https://github.com/default/{{ cookiecutter.service_name }}/issues',
-        'Source': 'https://github.com/default/{{ cookiecutter.service_name }}'
+        'Bug Reports': 'https://github.com/default/{{ cookiecutter.name }}/issues',
+        'Source': 'https://github.com/default/{{ cookiecutter.name }}'
     },
 )
