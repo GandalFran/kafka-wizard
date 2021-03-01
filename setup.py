@@ -22,7 +22,7 @@ def requirements(filename):
 
 
 setup(
-    name='kafka-wizard',
+    name='kafka_wizard',
     version='1.0',
     packages=find_packages(),
     url='https://github.com/GandalFran/kafka-wizard',
@@ -45,6 +45,11 @@ setup(
         "Intended Audience :: Developers",
         "Topic :: Software Development :: Libraries"
     ],
+    entry_points={
+        'console_scripts': [
+            'kafkawizard=kafka_wizard.cli:main'
+        ],
+    },
     python_requires='>=3',
     extras_require={
         "tests": requirements(filename='tests/requirements.txt'),
@@ -56,5 +61,5 @@ setup(
         'Bug Reports': 'https://github.com/GandalFran/kafka-wizard/issues',
         'Source': 'https://github.com/GandalFran/kafka-wizard',
         'Documentation': 'https://github.com/GandalFran/kafka-wizard'
-    },
+    }
 )

@@ -1,4 +1,4 @@
 setuptools
-xml
 cookiecutter
 argparse
+pyyaml

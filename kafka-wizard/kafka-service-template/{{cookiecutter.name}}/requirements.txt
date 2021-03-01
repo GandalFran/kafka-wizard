@@ -1,2 +1,0 @@
-setuptools
-confluent_kafka
