@@ -1,21 +1,20 @@
 {
     "author": "GandalFran",
     "email": "franpintosantos@usal.es",
-    "name": "D",
+    "name": "DB",
     "kafka": {
         "num_tries": 10,
         "input_topics": [
-            "50978c2f-e2db-4023-9dd6-deac8d0f3343"
+            "b57b7c2f-c0a5-489e-a13a-c07408a7d5eb",
+            "c176f148-2e96-41a7-a394-1c89b40f4ca6"
         ],
-        "output_topics": [
-            "c4a3c5ee-37cf-46d6-9929-4114d15a3e26"
-        ],
-        "group_id": "0aea56ea-f8f1-45db-b734-9bde8dec15dc",
+        "output_topics": [],
+        "group_id": "88b7a319-46e0-4ae5-9d5c-8dad723680b8",
         "broker": "localhost:9092",
         "delivery_timeout": 3000
     },
     "flow": {
-        "producer": "yes",
+        "producer": "no",
         "consumer": "yes"
     }
 }
