@@ -15,5 +15,5 @@ Kafka flow generation tool.
 An example of functional diagram can be found <a href='https://github.com/GandalFran/MASI-examples/blob/main/tests/test.xml'>here</a>.
 
 <p align="center">
-  <img width="480" height="180" src="https://github.com/GandalFran/MASI-examples/blob/main/tests/test.png">
+  <img src="https://github.com/GandalFran/MASI-examples/blob/main/tests/test.png">
 </p>
