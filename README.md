@@ -19,3 +19,6 @@ An example of functional diagram can be found <a href='https://github.com/Gandal
 <p align="center">
   <img src="https://github.com/GandalFran/MASI-examples/blob/main/tests/test.png">
 </p>
+
+####  Additional information
+The code generation of this tool, is based in the [kafka-cookie](https://github.com/GandalFran/kafka-cookie) template for [cookiecutter](https://github.com/cookiecutter/cookiecutter).
