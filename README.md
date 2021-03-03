@@ -1,5 +1,7 @@
 # Kafka wizard
 
+<img src="https://github.com/GandalFran/kafka-wizard/blob/main/docs/static/logo.png?raw=true" align="center" />
+
 Kafka flow generation tool.
 
 ## Usage 
