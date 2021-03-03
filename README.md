@@ -1,6 +1,8 @@
 # Kafka wizard
 
-<img src="https://github.com/GandalFran/kafka-wizard/blob/main/docs/static/logo.png?raw=true" align="center" />
+<div align="center">
+  <img src="https://github.com/GandalFran/kafka-wizard/blob/main/docs/static/logo.png?raw=true" height="300px" hspace="20" />
+</div>
 
 Kafka flow generation tool.
 
