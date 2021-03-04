@@ -30,13 +30,13 @@ class DrawioParser:
 
 	def _build_component_list(self, data):
 
-		# build default consumer id for all components
-		consumer_id = str(uuid.uuid4())
-
 		# build components
 		components = {}
 		for e in data:
 			if e['name'] is not None:
+				# build default consumer id for each components
+				consumer_id = str(uuid.uuid4())
+
 				c = {
 					'name': e['name'],
 					'input_topics': [],
@@ -69,12 +69,11 @@ class DrawioParser:
 			if style == 'special':
 				load_balanced_components.append(components[target])
 
-		# fix consumer id
+		# fix consumer id for the ones ho share it 
+		shared_consumer_id = str(uuid.uuid4())
 		for c in load_balanced_components:
-			# generate new consumer id
-			consumer_id = str(uuid.uuid4())
 			# assign to element
-			c['consumer_id'] = consumer_id
+			c['consumer_id'] = shared_consumer_id
 
 		# get components
 		components = list(components.values())

@@ -32,9 +32,6 @@ def main():
 	final_location = args.output_folder
 	delivery_timeout = args.delivery_timeout
 
-	print(f'diagram_file {file_location}')
-	print(f'final_location {final_location}')
-
 	# generate code
 	Wizard.generate(
 		 diagram_file=file_location

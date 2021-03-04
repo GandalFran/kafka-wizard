@@ -23,8 +23,8 @@ class PackageBuilder:
 			"email": self.email,
 			"name": package_info['name'],
 			"kafka_num_tries": self.num_tries,
-			"kafka_input_topics": package_info['input_topics'],
-			"kafka_output_topics": package_info['output_topics'],
+			"kafka_input_topics": ','.join(package_info['input_topics']),
+			"kafka_output_topics": ','.join(package_info['output_topics']),
 			"kafka_group_id": package_info['consumer_id'],
 			"kafka_broker": self.broker,
 			"kafka_delivery_timeout": self.delivery_timeout,
@@ -51,7 +51,7 @@ class PackageBuilder:
 
 		# run cookie cutter
 		cookie_repo = 'https://github.com/GandalFran/kafka-cookie.git'
-		cookiecutter(cookie_repo, config_file=config_file, no_input=True, output_dir=final_location)
+		cookiecutter(cookie_repo, config_file=config_file, checkout=True, no_input=True, output_dir=final_location)
 
 		# remove config file
 		unlink(config_file)
