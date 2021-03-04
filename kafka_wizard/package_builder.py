@@ -22,14 +22,14 @@ class PackageBuilder:
 			"author": self.author,
 			"email": self.email,
 			"name": package_info['name'],
-			"kafka.num_tries": self.num_tries,
-			"kafka.input_topics": package_info['input_topics'],
-			"kafka.output_topics": package_info['output_topics'],
-			"kafka.group_id": package_info['consumer_id'],
-			"kafka.broker": self.broker,
-			"kafka.delivery_timeout": self.delivery_timeout,
-			"flow.producer": 'yes' if package_info['output_topics'] else 'no',
-			"flow.consumer":'yes' if package_info['input_topics'] else 'no'
+			"kafka_num_tries": self.num_tries,
+			"kafka_input_topics": package_info['input_topics'],
+			"kafka_output_topics": package_info['output_topics'],
+			"kafka_group_id": package_info['consumer_id'],
+			"kafka_broker": self.broker,
+			"kafka_delivery_timeout": self.delivery_timeout,
+			"flow_producer": 'yes' if package_info['output_topics'] else 'no',
+			"flow_consumer":'yes' if package_info['input_topics'] else 'no'
 		}
 
 	def _prepare_pm2(self, package_info):
