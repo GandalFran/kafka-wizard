@@ -1,6 +1,6 @@
 #!usr/bin/python
 
-# Copyright 2021Francisco Pinto-Santos @ GandalFran in GitHub
+# Copyright 2021 Francisco Pinto-Santos @ GandalFran in GitHub
 # See LICENSE for details.
 
 import os

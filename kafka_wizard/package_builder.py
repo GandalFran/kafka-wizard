@@ -1,6 +1,6 @@
 #!usr/bin/python
 
-# Copyright 2021Francisco Pinto-Santos @ GandalFran in GitHub
+# Copyright 2021 Francisco Pinto-Santos @ GandalFran in GitHub
 # See LICENSE for details.
 
 import json
@@ -51,7 +51,7 @@ class PackageBuilder:
 
 		# run cookie cutter
 		cookie_repo = 'https://github.com/GandalFran/kafka-cookie.git'
-		cookiecutter(cookie_repo, config_file=config_file, checkout=True, no_input=True, output_dir=final_location)
+		cookiecutter(cookie_repo, config_file=config_file, no_input=True, output_dir=final_location)
 
 		# remove config file
 		unlink(config_file)

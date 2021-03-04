@@ -1,11 +1,12 @@
 #!usr/bin/python
 
-# Copyright 2021Francisco Pinto-Santos @ GandalFran in GitHub
+# Copyright 2021 Francisco Pinto-Santos @ GandalFran in GitHub
 # See LICENSE for details.
 
 
 import uuid
 import json
+from pprint import pprint
 import xml.etree.ElementTree as ET
 from os import path
 
@@ -28,55 +29,98 @@ class DrawioParser:
 				'style': 'normal' if e.get('style') is None or 'dashed' not in e.get('style') else 'special'
 			}
 
+	def _prepare_arrow(self, node):
+
+		# get all node children (arrows) and classify
+		normal_arrows = [node for node in node['children'] if node['info']['data']['style'] == 'normal']
+		special_arrows = [node for node in node['children'] if node['info']['data']['style'] == 'special']
+
+		# output topic
+		output_topic_name = f"{node['info']['data']['name']}_output"
+
+		# set name for normal arrows
+		for arrow_id, arrow in enumerate(normal_arrows):
+			arrow['info']['data']['topic_name'] = output_topic_name
+			arrow['info']['data']['associated_consumer_id'] = f"{node['info']['data']['name']}_{arrow_id}"
+
+		# set name for shared arrows
+		shared_arrows_group = f"shared_group"
+		for arrow in special_arrows:
+			arrow['info']['data']['topic_name'] = output_topic_name
+			arrow['info']['data']['associated_consumer_id'] = shared_arrows_group
+
+	def _build_connections(self, node):
+
+		# calculate input topics
+		for parent in node['parents']:
+			node['info']['input_topics'].append(parent['info']['data']['topic_name'])
+		node['info']['input_topics'] = list(set(node['info']['input_topics']))
+
+		# calculate input topics
+		for child in node['children']:
+			node['info']['output_topics'].append(child['info']['data']['topic_name'])
+		node['info']['output_topics'] = list(set(node['info']['output_topics']))
+
+		# calculate consumer_id
+		consumer_id = None
+		for parent in node['parents']:
+			if consumer_id != 'shared_group':
+				consumer_id = parent['info']['data']['associated_consumer_id']
+		node['info']['consumer_id'] = consumer_id
+
+	def _build_component(self, node):
+		return {
+			'name': node['info']['data']['name'],
+			'consumer_id': node['info']['consumer_id'],
+			'input_topics': node['info']['input_topics'],
+			'output_topics': node['info']['output_topics']
+		}
+
 	def _build_component_list(self, data):
 
-		# build components
-		components = {}
-		for e in data:
-			if e['name'] is not None:
-				# build default consumer id for each components
-				consumer_id = str(uuid.uuid4())
+		# build node list
+		nodes = [{
+			'parents': [],
+			'children': [],
+			'info': {
+				'data': node,
+				'input_topics': [],
+				'output_topics': [],
+				'consumer_id': None
+			},
+			'is_component': (node['name'] != None)
+		} for node in data]
 
-				c = {
-					'name': e['name'],
-					'input_topics': [],
-					'output_topics': [],
-					'consumer_id': consumer_id
-				}
-				components[e['id']] = c
+		# build graph
+		for node in nodes:
+			for n in nodes:
+				# check if node is in fathers
+				if n['info']['data']['id'] == node['info']['data']['source']:
+					if node not in n['children']:
+						n['children'].append(node)
+					if n not in node['parents']:
+						node['parents'].append(n)
+				# check if node is in children
+				if n['info']['data']['id'] == node['info']['data']['target']:
+					if node not in n['parents']:
+						n['parents'].append(node)
+					if n not in node['children']:
+						node['children'].append(n)
 
-		# build connections
-		load_balanced_components = []
-		for e in data:
+		# prepare each arrow to have the previous node name
+		for node in nodes:
+			if node['is_component']:
+				self._prepare_arrow(node=node)
 
-			# retrieve style
-			style = e['style']
+		# build connections between components
+		for node in nodes:
+			if node['is_component']:
+				self._build_connections(node=node)
 
-			# retrieve source and destination components
-			source = e['source']
-			target = e['target']
-			
-			# build topic id
-			topic_id = str(uuid.uuid4())
+		# retrieve components
+		components = [self._build_component(node) for node in nodes if node['is_component']]
 
-			if source is not None:
-				components[source]['output_topics'].append(topic_id)
-
-			if target is not None:
-				components[target]['input_topics'].append(topic_id)
-
-			# save to fix consumer id if dashed
-			if style == 'special':
-				load_balanced_components.append(components[target])
-
-		# fix consumer id for the ones ho share it 
-		shared_consumer_id = str(uuid.uuid4())
-		for c in load_balanced_components:
-			# assign to element
-			c['consumer_id'] = shared_consumer_id
-
-		# get components
-		components = list(components.values())
+		pprint(components)
 
 		return components
 
